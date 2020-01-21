@@ -15,3 +15,6 @@ addons:
 
 install: cmake .
 script: make
+
+notifications:
+  email: false
