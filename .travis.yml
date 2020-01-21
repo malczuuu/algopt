@@ -1,0 +1,17 @@
+dist: bionic
+sudo: required
+
+language: cpp
+compiler: gcc
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-6
+      - g++-6
+      - cmake
+
+install: cmake .
+script: make
