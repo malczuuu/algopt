@@ -78,14 +78,20 @@ static void benchmark(int size)
     cout << "[STOP]  loop unwinding (time=" << (static_cast<double>(instant() - start) / 1000.0) << "s) "
          << (correct ? "OK" : "ERROR") << endl;
 
-    cout << "[START] SSE2" << endl;
-
     prepare_block(a_matr, x_vect, size, block_size);
 
+    cout << "[START] SSE2" << endl;
     start = instant();
     matvec_sse2(y_vect, a_matr, x_vect, size);
     correct = check(y_vect, z_vect, size);
     cout << "[STOP]  SSE2 (time=" << (static_cast<double>(instant() - start) / 1000.0) << "s) "
+         << (correct ? "OK" : "ERROR") << endl;
+
+    cout << "[START] SSE2 with unwinding" << endl;
+    start = instant();
+    matvec_sse2_unwinding(y_vect, a_matr, x_vect, size);
+    correct = check(y_vect, z_vect, size);
+    cout << "[STOP]  SSE2 with unwinding (time=" << (static_cast<double>(instant() - start) / 1000.0) << "s) "
          << (correct ? "OK" : "ERROR") << endl;
 
     cout << "[START] AVX" << endl;
@@ -93,6 +99,13 @@ static void benchmark(int size)
     matvec_avx(y_vect, a_matr, x_vect, size);
     correct = check(y_vect, z_vect, size);
     cout << "[STOP]  AVX (time=" << (static_cast<double>(instant() - start) / 1000.0) << "s) "
+         << (correct ? "OK" : "ERROR") << endl;
+
+    cout << "[START] AVX + FMA" << endl;
+    start = instant();
+    matvec_fma_avx(y_vect, a_matr, x_vect, size);
+    correct = check(y_vect, z_vect, size);
+    cout << "[STOP]  AVX + FMA (time=" << (static_cast<double>(instant() - start) / 1000.0) << "s) "
          << (correct ? "OK" : "ERROR") << endl;
 
     free(a_matr);
