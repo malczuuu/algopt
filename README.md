@@ -16,3 +16,7 @@ Benchmark tool for matrix by vector multiplication. Matrix is stored within sing
 * 8-times loop unwinding
 * SSE2 vectorization (Streaming SIMD Extensions 2)
 * AVX vectorization (Advanced Vector Extensions)
+
+## Code style
+
+* Code should be formatted using `clang-format -i **/*.cpp **/*.hpp` command.
