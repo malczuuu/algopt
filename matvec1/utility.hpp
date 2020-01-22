@@ -3,12 +3,12 @@
 
 #include <vector>
 
-std::vector<int> parseargs(int argc, char *argv[]);
+std::vector<int> parseargs(int argc, char* argv[]);
 
 long instant();
 
-void prepare(double *a_matr, double *x_vect, int size);
+void prepare(double* a_matr, double* x_vect, int size);
 
-void prepare_block(double *a_matr, double *x_vect, int size, int block_size);
+void prepare_block(double* a_matr, double* x_vect, int size, int block_size);
 
 #endif
