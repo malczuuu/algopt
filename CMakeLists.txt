@@ -19,6 +19,11 @@ set(MATVEC1_SOURCES
 add_executable(matvec1 ${MATVEC1_SOURCES})
 
 
-set(MATVEC2_SOURCES matvec2/matvec2_main.cpp)
+set(MATVEC2_SOURCES
+        matvec2/algorithms.cpp
+        matvec2/algorithms.hpp
+        matvec2/matvec2_main.cpp
+        matvec2/utility.cpp
+        matvec2/utility.hpp)
 
 add_executable(matvec2 ${MATVEC2_SOURCES})
