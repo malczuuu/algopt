@@ -2,14 +2,12 @@
 #include <emmintrin.h>
 #include <immintrin.h>
 
-static inline int matr_index(int size, int i, int j) { return i + size * j; }
-
 void matvec_naive(double* y_vect, const double* a_matr, const double* x_vect, int size)
 {
     for (int i = 0; i < size; ++i) {
         y_vect[i] = 0.0;
         for (int j = 0; j < size; ++j) {
-            y_vect[i] += a_matr[matr_index(size, i, j)] * x_vect[j];
+            y_vect[i] += a_matr[i + size * j] * x_vect[j];
         }
     }
 }
@@ -20,7 +18,7 @@ void matvec_fixed_memjumps(double* y_vect, const double* a_matr, const double* x
 
     for (int j = 0; j < size; ++j) {
         for (int i = 0; i < size; ++i) {
-            y_vect[i] += a_matr[matr_index(size, i, j)] * x_vect[j];
+            y_vect[i] += a_matr[i + size * j] * x_vect[j];
         }
     }
 }
@@ -45,7 +43,7 @@ void matvec_unwinding(double* y_vect, const double* a_matr, const double* x_vect
             y_vect[i + 7] += a_matr[ij + 7] * x_vect[j];
         }
         for (; i < size; i++) {
-            y_vect[i] += a_matr[matr_index(size, i, j)] * x_vect[j];
+            y_vect[i] += a_matr[i + j * size] * x_vect[j];
         }
     }
 }
