@@ -3,9 +3,10 @@ project(algopt)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "build")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY build)
 
-set(CMAKE_CXX_FLAGS "-mavx")
+set(CMAKE_CXX_FLAGS -mavx)
+set(CMAKE_CXX_FLAGS -march=native)
 
 
 set(MATVEC1_SOURCES
