@@ -3,10 +3,24 @@ project(algopt)
 
 set(CMAKE_CXX_STANDARD 14)
 
+find_package (Threads)
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY build)
 
-set(CMAKE_CXX_FLAGS -mavx)
-set(CMAKE_CXX_FLAGS -march=native)
+add_compile_options(-mavx -march=native)
+
+
+set(DOT_PROD_SOURCES
+        dot-prod/dot_data_t.hpp
+        dot-prod/dot_prod_main.cpp
+        dot-prod/thread_funcs.hpp
+        dot-prod/thread_funcs.cpp
+        dot-prod/utility.hpp
+        dot-prod/utility.cpp)
+
+add_executable(dotprod ${DOT_PROD_SOURCES})
+
+target_link_libraries (dotprod ${CMAKE_THREAD_LIBS_INIT})
 
 
 set(MATVEC1_SOURCES
