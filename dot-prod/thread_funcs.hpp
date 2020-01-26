@@ -3,6 +3,9 @@
 
 #include "dot_data_t.hpp"
 
+namespace dotprod {
+
 void dot_prod_naive(dot_data_t* data);
+}
 
 #endif

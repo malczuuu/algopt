@@ -1,8 +1,12 @@
 #include "utility.hpp"
+#include <chrono>
 #include <iostream>
 #include <vector>
 
 using namespace std;
+using namespace chrono;
+
+namespace dotprod {
 
 vector<args_t> parseargs(int argc, char* argv[])
 {
@@ -43,4 +47,7 @@ vector<args_t> parseargs(int argc, char* argv[])
         cerr << "[ERROR] no vector size provided" << endl;
     }
     return params;
+}
+
+long instant() { return duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count(); }
 }

@@ -6,6 +6,7 @@
 #include <vector>
 
 using namespace std;
+using namespace dotprod;
 
 void benchmark(int threads_count, int repetitions, int size);
 

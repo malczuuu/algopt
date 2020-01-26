@@ -3,6 +3,8 @@
 
 #include <vector>
 
+namespace dotprod {
+
 class args_t {
 private:
     const int _threads;
@@ -25,10 +27,15 @@ public:
     }
 
     inline const int threads() const { return _threads; }
+
     inline const int repetitions() const { return _repetitions; }
+
     inline const int size() const { return _size; }
 };
 
 std::vector<args_t> parseargs(int argc, char* argv[]);
+
+long instant();
+}
 
 #endif

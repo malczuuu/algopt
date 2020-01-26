@@ -1,5 +1,7 @@
 #include "thread_funcs.hpp"
 
+namespace dotprod {
+
 void dot_prod_naive(dot_data_t* data)
 {
     for (int rep = 0; rep < data->repetitions(); ++rep) {
@@ -9,4 +11,5 @@ void dot_prod_naive(dot_data_t* data)
             data->result(data->result() + x * y);
         }
     }
+}
 }
