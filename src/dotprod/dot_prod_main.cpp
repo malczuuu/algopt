@@ -1,14 +1,43 @@
 #include "dot_data_t.hpp"
-#include "thread_funcs.hpp"
-#include "utility.hpp"
+#include "dot_prod_funcs.hpp"
+#include <chrono>
 #include <iostream>
 #include <thread>
 #include <vector>
 
 using namespace std;
-using namespace dotprod;
+using namespace std::chrono;
 
-void benchmark(int threads_count, int repetitions, int size);
+class args_t {
+private:
+    const int _threads;
+    const int _repetitions;
+    const int _size;
+
+public:
+    args_t(int threads, int repetitions, int size)
+        : _threads(threads)
+        , _repetitions(repetitions)
+        , _size(size)
+    {
+    }
+
+    args_t(const args_t& obj)
+        : _threads(obj.threads())
+        , _repetitions(obj.repetitions())
+        , _size(obj.size())
+    {
+    }
+
+    inline const int threads() const { return _threads; }
+    inline const int repetitions() const { return _repetitions; }
+    inline const int size() const { return _size; }
+};
+
+static void benchmark(int threads_count, int repetitions, int size);
+static vector<args_t> parseargs(int argc, char* argv[]);
+
+inline long instant() { return duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count(); }
 
 int main(int argc, char* argv[])
 {
@@ -18,7 +47,7 @@ int main(int argc, char* argv[])
     return 0;
 }
 
-void benchmark(int threads_count, int repetitions, int size)
+static void benchmark(int threads_count, int repetitions, int size)
 {
     int slice_size = size / threads_count;
     size = slice_size * threads_count;
@@ -67,4 +96,45 @@ void benchmark(int threads_count, int repetitions, int size)
 
     free(x_vect);
     free(y_vect);
+}
+
+static vector<args_t> parseargs(int argc, char* argv[])
+{
+    vector<args_t> params;
+    if (argc != 4) {
+        cerr << "[ERROR] expected call" << argv[0] << " <threads> <repetitions> <size>" << endl;
+        return vector<args_t>();
+    }
+
+    int threads = 0;
+    int repetitions = 0;
+    int size = 0;
+
+    try {
+        threads = stoi(argv[1]);
+    } catch (invalid_argument& e) {
+        cerr << "[ERROR] " << argv[1] << " is not a valid integer" << endl;
+        exit(1);
+    }
+
+    try {
+        repetitions = stoi(argv[2]);
+    } catch (invalid_argument& e) {
+        cerr << "[ERROR] " << argv[2] << " is not a valid integer" << endl;
+        exit(1);
+    }
+
+    try {
+        size = stoi(argv[3]);
+    } catch (invalid_argument& e) {
+        cerr << "[ERROR] " << argv[3] << " is not a valid integer" << endl;
+        exit(1);
+    }
+
+    params.emplace_back(args_t(threads, repetitions, size));
+
+    if (params.empty()) {
+        cerr << "[ERROR] no vector size provided" << endl;
+    }
+    return params;
 }

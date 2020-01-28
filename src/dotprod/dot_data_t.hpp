@@ -1,8 +1,6 @@
 #ifndef __DOT_PROD_DOT_DATA_T__
 #define __DOT_PROD_DOT_DATA_T__
 
-namespace dotprod {
-
 class dot_data_t {
 private:
     const double* const _x_vect;
@@ -58,6 +56,5 @@ public:
 
     inline void result(double result) { _result = result; }
 };
-}
 
 #endif

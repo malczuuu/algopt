@@ -1,6 +1,4 @@
-#include "thread_funcs.hpp"
-
-namespace dotprod {
+#include "dot_prod_funcs.hpp"
 
 void dot_prod_naive(dot_data_t* data)
 {
@@ -11,5 +9,4 @@ void dot_prod_naive(dot_data_t* data)
             data->result(data->result() + x * y);
         }
     }
-}
 }

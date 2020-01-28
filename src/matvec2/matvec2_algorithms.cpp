@@ -2,7 +2,7 @@
 #include <emmintrin.h>
 #include <immintrin.h>
 
-void matvec_naive(double* y_vect, const double* a_matr, const double* x_vect, int size)
+void matvec2_naive(double* y_vect, const double* a_matr, const double* x_vect, int size)
 {
     for (int i = 0; i < size; ++i) {
         y_vect[i] = 0.0;
@@ -12,11 +12,11 @@ void matvec_naive(double* y_vect, const double* a_matr, const double* x_vect, in
     }
 }
 
-void matvec_sse2(double* y_vect, const double* a_matr, const double* x_vect, int size) {}
+void matvec2_sse2(double* y_vect, const double* a_matr, const double* x_vect, int size) {}
 
-void matvec_avx(double* y_vect, const double* a_matr, const double* x_vect, int size) {}
+void matvec2_avx(double* y_vect, const double* a_matr, const double* x_vect, int size) {}
 
-void matvec_fma_avx(double* y_vect, const double* a_matr, const double* x_vect, int size)
+void matvec2_fma_avx(double* y_vect, const double* a_matr, const double* x_vect, int size)
 {
     int outer_unwinding = 4;
     int inner_unwinding = 16;
