@@ -102,7 +102,7 @@ static vector<args_t> parseargs(int argc, char* argv[])
 {
     vector<args_t> params;
     if (argc != 4) {
-        cerr << "[ERROR] expected call" << argv[0] << " <threads> <repetitions> <size>" << endl;
+        cerr << "[ERROR] expected call " << argv[0] << " <threads> <repetitions> <size>" << endl;
         return vector<args_t>();
     }
 
