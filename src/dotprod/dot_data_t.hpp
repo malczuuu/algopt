@@ -3,8 +3,8 @@
 
 class dot_data_t {
 private:
-    const double* const _x_vect;
-    const double* const _y_vect;
+    double* const _x_vect;
+    double* const _y_vect;
     const int _repetitions;
     const int _size;
     const int _sub_offset;
@@ -13,8 +13,7 @@ private:
     int _status;
 
 public:
-    dot_data_t(
-        const double* const x_vect, const double* const y_vect, int repetitions, int size, int sub_offset, int sub_size)
+    dot_data_t(double* const x_vect, double* const y_vect, int repetitions, int size, int sub_offset, int sub_size)
         : _x_vect(x_vect)
         , _y_vect(y_vect)
         , _repetitions(repetitions)
@@ -38,9 +37,9 @@ public:
     {
     }
 
-    inline const double* const x_vect() const { return _x_vect; }
+    inline double* const x_vect() const { return _x_vect; }
 
-    inline const double* const y_vect() const { return _y_vect; }
+    inline double* const y_vect() const { return _y_vect; }
 
     inline const int repetitions() const { return _repetitions; }
 

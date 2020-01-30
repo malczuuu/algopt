@@ -70,7 +70,7 @@ static void benchmark(int threads_count, int repetitions, int size)
     }
 
     for (int i = 0; i < size; ++i) {
-        x_vect[i] = y_vect[i] = 1.0;
+        x_vect[i] = y_vect[i] = i;
     }
 
     vector<dot_data_t> datas;
@@ -79,8 +79,35 @@ static void benchmark(int threads_count, int repetitions, int size)
     }
 
     vector<thread> threads;
+    threads.reserve(threads_count);
+
+
+    // naive algorithm benchmark
+
+    long start = instant();
     for (int i = 0; i < threads_count; ++i) {
         threads.emplace_back(thread(&dot_prod_naive, &datas[i]));
+    }
+
+    for (int i = 0; i < threads.size(); ++i) {
+        threads[i].join();
+    }
+
+    double naive_dot_prod = 0.0;
+    for (int i = 0; i < datas.size(); ++i) {
+        naive_dot_prod += datas[i].result();
+    }
+
+    long stop = instant();
+    cout << "[naive]   " << (stop - start) / 1000.0 << "ms" << endl;
+    threads.clear();
+
+
+    // SSE2 algorithm benchmark
+
+    start = instant();
+    for (int i = 0; i < threads_count; ++i) {
+        threads.emplace_back(thread(&dot_prod_sse2, &datas[i]));
     }
 
     for (int i = 0; i < threads.size(); ++i) {
@@ -91,8 +118,53 @@ static void benchmark(int threads_count, int repetitions, int size)
     for (int i = 0; i < datas.size(); ++i) {
         dot_prod += datas[i].result();
     }
+    bool correct = abs(dot_prod - naive_dot_prod) < 1.0e-9;
 
-    cout << dot_prod << endl;
+    stop = instant();
+    cout << "[SSE2]    " << (stop - start) / 1000.0 << "ms [" << (correct ? "OK" : "ERROR") << "]" << endl;
+    threads.clear();
+
+
+    // AVX algorithm benchmark
+
+    for (int i = 0; i < threads_count; ++i) {
+        threads.emplace_back(thread(&dot_prod_avx, &datas[i]));
+    }
+
+    for (int i = 0; i < threads.size(); ++i) {
+        threads[i].join();
+    }
+
+    dot_prod = 0.0;
+    for (int i = 0; i < datas.size(); ++i) {
+        dot_prod += datas[i].result();
+    }
+    correct = abs(dot_prod - naive_dot_prod) < 1.0e-9;
+
+    stop = instant();
+    cout << "[AVX]     " << (stop - start) / 1000.0 << "ms [" << (correct ? "OK" : "ERROR") << "]" << endl;
+    threads.clear();
+
+
+    // AVX+FMA algorithm benchmark
+
+    for (int i = 0; i < threads_count; ++i) {
+        threads.emplace_back(thread(&dot_prod_avx_fma, &datas[i]));
+    }
+
+    for (int i = 0; i < threads.size(); ++i) {
+        threads[i].join();
+    }
+
+    dot_prod = 0.0;
+    for (int i = 0; i < datas.size(); ++i) {
+        dot_prod += datas[i].result();
+    }
+    correct = abs(dot_prod - naive_dot_prod) < 1.0e-9;
+
+    stop = instant();
+    cout << "[AVX+FMA] " << (stop - start) / 1000.0 << "ms [" << (correct ? "OK" : "ERROR") << "]" << endl;
+    threads.clear();
 
     free(x_vect);
     free(y_vect);
