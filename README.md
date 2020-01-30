@@ -4,9 +4,17 @@
 
 Optimization of algorithms for operations on vectors and matrices.
 
+Exercises from Modeling of the Technical Problems classes converted from Visual Studio into CMake project to be able to
+build and run on Linux platform.
+
 * [`matvec1`](/src/matvec1) - matrix by vector multiplication (1)
 * [`matvec2`](/src/matvec2) - matrix by vector multiplication (2)
 * [`dotprod`](/src/dotprod) - dot product of two vectors
+
+## Build and run
+
+* `cmake .` to generate `Makefile` and initialize project files
+* `make` to build sources, output files will be located within `./build/bin/` directory
 
 ## `matvec1`
 
