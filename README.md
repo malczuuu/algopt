@@ -4,8 +4,11 @@
 
 Optimization of algorithms for operations on vectors and matrices.
 
-Exercises from Modeling of the Technical Problems classes converted from Visual Studio into CMake project to be able to
-build and run on Linux platform.
+Projects from modeling of the technical problems classes at [Cracow University of Technology](https://pk.edu.pl) created
+by Damian Malczewski in 2019/20.
+
+Project structure was converted from Visual Studio into CMake project to be able to build and run on other platforms as 
+well.
 
 * [`matvec1`](/src/matvec1) - matrix by vector multiplication (1)
 * [`matvec2`](/src/matvec2) - matrix by vector multiplication (2)
