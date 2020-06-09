@@ -10,14 +10,18 @@ by Damian Malczewski in 2019/20.
 Project structure was converted from Visual Studio into CMake project to be able to build and run on other platforms as 
 well.
 
-* [`matvec1`](/src/matvec1) - matrix by vector multiplication (1)
-* [`matvec2`](/src/matvec2) - matrix by vector multiplication (2)
-* [`dotprod`](/src/dotprod) - dot product of two vectors
+* [`matvec1`](/matvec1) - matrix by vector multiplication (1)
+* [`matvec2`](/matvec2) - matrix by vector multiplication (2)
+* [`dotprod`](/dotprod) - dot product of two vectors
 
-## Build and run
+## Build
 
-* `cmake .` to generate `Makefile` and initialize project files
-* `make` to build sources, output files will be located within `./build/bin/` directory
+```bash
+$ mkdir cmake-build-debug/
+$ cd cmake-build-debug/
+$ cmake ..
+$ make
+```
 
 ## `matvec1`
 
@@ -51,4 +55,4 @@ Benchmark tool for dot product calculation in multi-threaded mode.
 
 ## Code style
 
-* Code should be formatted using `clang-format -i src/**/*.cpp src/**/*.hpp` command.
+* Code should be formatted using `./format` script.

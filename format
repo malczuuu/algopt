@@ -1,0 +1,9 @@
+#!/bin/sh
+
+exec clang-format -i \
+    dotprod/src/*.cpp \
+    dotprod/src/*.hpp \
+    matvec1/src/*.cpp \
+    matvec1/src/*.hpp \
+    matvec2/src/*.cpp \
+    matvec2/src/*.hpp

@@ -37,17 +37,17 @@ public:
     {
     }
 
-    inline double* const x_vect() const { return _x_vect; }
+    inline double* x_vect() const { return _x_vect; }
 
-    inline double* const y_vect() const { return _y_vect; }
+    inline double* y_vect() const { return _y_vect; }
 
-    inline const int repetitions() const { return _repetitions; }
+    inline const int& repetitions() const { return _repetitions; }
 
-    inline const int size() const { return _size; }
+    inline const int& size() const { return _size; }
 
-    inline const int sub_offset() const { return _sub_offset; }
+    inline const int& sub_offset() const { return _sub_offset; }
 
-    inline const int sub_size() const { return _sub_size; }
+    inline const int& sub_size() const { return _sub_size; }
 
     inline double result() const { return _result; }
 
