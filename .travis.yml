@@ -13,8 +13,12 @@ addons:
       - g++-6
       - cmake
 
-install: cmake .
-script: make
+install:
+  - mkdir cmake-build/
+  - cmake .
+script:
+  - cd cmake-build/
+  - make
 
 notifications:
   email: false
