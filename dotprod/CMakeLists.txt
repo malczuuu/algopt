@@ -11,6 +11,6 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY build/lib)
 
 add_compile_options(-mavx -march=native)
 
-set(DOTPROD_SOURCES src/dot_data_t.hpp src/dot_prod_main.cpp src/dot_prod_funcs.hpp src/dot_prod_funcs.cpp)
+set(DOTPROD_SOURCES src/dot_data_t.hpp src/dotprod.cpp src/dot_prod_funcs.hpp src/dot_prod_funcs.cpp)
 add_executable(dotprod ${DOTPROD_SOURCES})
 target_link_libraries(dotprod ${CMAKE_THREAD_LIBS_INIT})
