@@ -15,6 +15,7 @@ addons:
 
 install:
   - mkdir cmake-build/
+  - cd cmake-build/
   - cmake ..
 script:
   - cd cmake-build/
