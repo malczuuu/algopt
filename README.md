@@ -16,6 +16,8 @@ well.
 
 ## Build
 
+It's possible to build project via command line and with any IDE which support CMake.
+
 ```bash
 $ mkdir cmake-build-debug/
 $ cd cmake-build-debug/
