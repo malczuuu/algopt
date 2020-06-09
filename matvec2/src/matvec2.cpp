@@ -1,4 +1,4 @@
-#include "matvec2_algorithms.hpp"
+#include "algorithms2.hpp"
 #include <chrono>
 #include <cstring>
 #include <iostream>
